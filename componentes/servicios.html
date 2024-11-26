@@ -6,6 +6,8 @@
 
     </head>
     <body>
+      <div id="navbar"></div> <!-- Contenedor para el navbar -->
+
     <div class="container">
       <form class="product-form" id="productForm">
         <h2>Ingreso de Productos</h2>
@@ -44,6 +46,19 @@
     </div>
     
     <script src="../scripts/servicios.js">
-
     </script>
+    <script >
+      // Función para cargar el navbar
+      function loadNavbar() {
+          fetch('navbar.html')
+              .then(response => response.text())
+              .then(data => {
+                  document.getElementById('navbar').innerHTML = data;
+              })
+              .catch(error => console.error('Error al cargar el navbar:', error));
+      }
+  
+      // Llamar a la función para cargar el navbar
+      loadNavbar();
+  </script>
     </body></html>

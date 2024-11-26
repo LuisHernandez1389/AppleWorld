@@ -3,6 +3,8 @@
     <title>Sistema de Búsqueda por Código de Barras</title>
     <link rel="stylesheet" href="../estilos/ventas.css">
     </head>
+    <div id="navbar"></div> <!-- Contenedor para el navbar -->
+
     <body>
     <div class="container">
       <form class="search-form" id="searchForm">
@@ -38,4 +40,18 @@
     </div>
     
     <script src="../scripts/ventas.js"></script>
+    <script >
+      // Función para cargar el navbar
+      function loadNavbar() {
+          fetch('navbar.html')
+              .then(response => response.text())
+              .then(data => {
+                  document.getElementById('navbar').innerHTML = data;
+              })
+              .catch(error => console.error('Error al cargar el navbar:', error));
+      }
+  
+      // Llamar a la función para cargar el navbar
+      loadNavbar();
+  </script>
     </body></html>
