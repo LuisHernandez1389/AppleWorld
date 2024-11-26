@@ -1,0 +1,49 @@
+<html><head><base href="." target="_blank">
+    <meta charset="UTF-8">
+    <title>Sistema de Ingreso de Productos</title>
+
+    <link rel="stylesheet" href="../estilos/servicios.css">
+
+    </head>
+    <body>
+    <div class="container">
+      <form class="product-form" id="productForm">
+        <h2>Ingreso de Productos</h2>
+        <input type="text" 
+               id="nameInput" 
+               placeholder="Nombre del producto"
+               required>
+        <input type="text" 
+               id="descriptionInput" 
+               placeholder="Descripción"
+               required>
+        <input type="number" 
+               id="priceInput" 
+               placeholder="Precio"
+               step="0.01"
+               required>
+        <div id="productAlert" class="alert alert-error"></div>
+        <button type="submit" class="btn">Agregar al Carrito</button>
+      </form>
+    
+      <div class="cart">
+        <h2>Carrito de Compras</h2>
+        <div id="cartItems">
+          <!-- Los items del carrito se cargarán aquí -->
+        </div>
+        <div class="cart-total">
+          Total: $<span id="cartTotal">0.00</span>
+        </div>
+        <button id="completeSaleBtn" class="complete-sale-btn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Completar Venta
+        </button>
+      </div>
+    </div>
+    
+    <script src="../scripts/servicios.js">
+
+    </script>
+    </body></html>

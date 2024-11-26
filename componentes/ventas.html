@@ -1,0 +1,41 @@
+<html><head><base href="." target="_blank">
+    <meta charset="UTF-8">
+    <title>Sistema de Búsqueda por Código de Barras</title>
+    <link rel="stylesheet" href="../estilos/ventas.css">
+    </head>
+    <body>
+    <div class="container">
+      <form class="search-form" id="searchForm">
+        <input type="text" 
+               id="barcodeInput" 
+               placeholder="Escanea o ingresa el código de barras"
+               autocomplete="off">
+        <div id="searchAlert" class="alert alert-error"></div>
+      </form>
+    
+      <div class="products-list">
+        <h2>Lista de Productos</h2>
+        <div id="productsList">
+          <!-- Los productos se cargarán aquí dinámicamente -->
+        </div>
+      </div>
+    
+      <div class="cart">
+        <h2>Carrito de Compras</h2>
+        <div id="cartItems">
+          <!-- Los items del carrito se cargarán aquí -->
+        </div>
+        <div class="cart-total">
+          Total: $<span id="cartTotal">0.00</span>
+        </div>
+        <button id="completeSaleBtn" class="complete-sale-btn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Completar Venta
+        </button>
+      </div>
+    </div>
+    
+    <script src="../scripts/ventas.js"></script>
+    </body></html>
