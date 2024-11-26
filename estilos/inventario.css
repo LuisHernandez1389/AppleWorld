@@ -1,0 +1,201 @@
+:root {
+    --primary: #1976D2;
+    --secondary: #FF5722;
+    --background: #FFFFFF;
+    --text: #263238;
+    --hover: #FF7043;
+    --success: #4CAF50;
+    --danger: #f44336;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  
+  body {
+    background: var(--background);
+    color: var(--text);
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+  
+  .product-form {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(25, 118, 210, 0.15);
+    border: 2px solid rgba(25, 118, 210, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+  }
+  
+  .product-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+  }
+  
+  .product-form input, .product-form select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #BBDEFB;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #F8FBFE;
+  }
+  
+  .product-form input:focus, .product-form select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+    background: white;
+  }
+  
+  .products-table {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(25, 118, 210, 0.15);
+    border: 2px solid rgba(255, 87, 34, 0.1);
+    position: relative;
+  }
+  
+  .products-table::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), #FF8A65);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #E3F2FD;
+  }
+  
+  th {
+    background: #F5F9FF;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  tr:hover {
+    background-color: #FFF3E0;
+  }
+  
+  .btn {
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border: none;
+    color: white;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+  }
+  
+  .btn-primary:hover {
+    background: #1565C0;
+  }
+  
+  .btn-danger {
+    background: var(--danger);
+  }
+  
+  .btn-danger:hover {
+    background: #d32f2f;
+  }
+  
+  .btn-edit {
+    background: var(--secondary);
+  }
+  
+  .btn-edit:hover {
+    background: var(--hover);
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .alert {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 10px 0;
+    display: none;
+    font-weight: 500;
+  }
+  
+  .alert-error {
+    background: #FFEBEE;
+    color: #C62828;
+    border: 1px solid #FFCDD2;
+  }
+  
+  .alert-success {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #C8E6C9;
+  }
+  
+  h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #E3F2FD;
+    padding-bottom: 10px;
+    position: relative;
+  }
+  
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--primary);
+  }
+  
+  .empty-message {
+    text-align: center;
+    color: #90A4AE;
+    padding: 30px;
+    font-style: italic;
+  }
