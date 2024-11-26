@@ -1,0 +1,91 @@
+<html><head><base href="." target="_blank">
+    <meta charset="UTF-8">
+    <title>Sistema de Inventario</title>
+    <style>
+    :root {
+      --primary: #1976D2;
+      --secondary: #FF5722;
+      --background: #FFFFFF;
+      --text: #263238;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    
+    .navbar {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-brand {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .nav-link.active {
+      background: var(--secondary);
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    </style>
+    </head>
+    <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="https://example.com" class="nav-brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3h18v18H3zM12 8v8M8 12h8"/>
+          </svg>
+          Sistema de Inventario
+        </a>
+        <div class="nav-links">
+          <a href="https://example.com/inventario" class="nav-link active">Inventario</a>
+          <a href="https://example.com/ventas" class="nav-link">Ventas</a>
+          <a href="https://example.com/gastos" class="nav-link">Gastos</a>
+          <a href="https://example.com/reportes" class="nav-link">Reportes</a>
+        </div>
+      </div>
+    </nav>
+    </body></html>
