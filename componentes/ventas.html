@@ -1,11 +1,13 @@
-<html><head><base href="." target="_blank">
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <title>Sistema de Búsqueda por Código de Barras</title>
     <link rel="stylesheet" href="../estilos/ventas.css">
-    </head>
+</head>
+<body>
     <div id="navbar"></div> <!-- Contenedor para el navbar -->
 
-    <body>
     <div class="container">
       <form class="search-form" id="searchForm">
         <input type="text" 
@@ -39,8 +41,10 @@
       </div>
     </div>
     
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="../scripts/ventas.js"></script>
-    <script >
+    <script>
       // Función para cargar el navbar
       function loadNavbar() {
           fetch('navbar.html')
@@ -53,5 +57,6 @@
   
       // Llamar a la función para cargar el navbar
       loadNavbar();
-  </script>
-    </body></html>
+    </script>
+</body>
+</html>

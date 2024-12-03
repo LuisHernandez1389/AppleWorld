@@ -1,12 +1,12 @@
-<html><head><base href="." target="_blank">
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <title>Sistema de Ingreso de Productos</title>
-
     <link rel="stylesheet" href="../estilos/servicios.css">
-
-    </head>
-    <body>
-      <div id="navbar"></div> <!-- Contenedor para el navbar -->
+</head>
+<body>
+    <div id="navbar"></div> <!-- Contenedor para el navbar -->
 
     <div class="container">
       <form class="product-form" id="productForm">
@@ -45,9 +45,12 @@
       </div>
     </div>
     
-    <script src="../scripts/servicios.js">
-    </script>
-    <script >
+    <!-- Cargar Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="../scripts/servicios.js"></script>
+
+    <script>
       // Función para cargar el navbar
       function loadNavbar() {
           fetch('navbar.html')
@@ -57,8 +60,9 @@
               })
               .catch(error => console.error('Error al cargar el navbar:', error));
       }
-  
+
       // Llamar a la función para cargar el navbar
       loadNavbar();
-  </script>
-    </body></html>
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+:root {
+    --primary: #1976D2;
+    --secondary: #FF5722;
+    --background: #FFFFFF;
+    --text: #263238;
+    --hover: #FF7043;
+    --success: #4CAF50;
+    --success-hover: #45a049;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  
+  body {
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  
+  .container {
+    padding-top: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+  }
+  
+  .report-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(25, 118, 210, 0.15);
+    border: 2px solid rgba(25, 118, 210, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(25, 118, 210, 0.2);
+  }
+  
+  .report-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .report-icon {
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .expenses-icon {
+    background: #E3F2FD;
+    color: var(--primary);
+  }
+  
+  .sales-icon {
+    background: #FBE9E7;
+    color: var(--secondary);
+  }
+  
+  .inventory-icon {
+    background: #E8F5E9;
+    color: var(--success);
+  }
+  
+  .report-title {
+    font-size: 1.5em;
+    color: var(--text);
+    margin: 0;
+  }
+  
+  .metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #E3F2FD;
+  }
+  
+  .metric:last-child {
+    border-bottom: none;
+  }
+  
+  .metric-label {
+    color: #78909C;
+  }
+  
+  .metric-value {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  .trend-up {
+    color: var(--success);
+  }
+  
+  .trend-down {
+    color: #F44336;
+  }
+  
+  .chart-container {
+    margin-top: 20px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .date-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .date-filter select {
+    padding: 8px 15px;
+    border: 2px solid #BBDEFB;
+    border-radius: 8px;
+    outline: none;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .date-filter select:focus {
+    border-color: var(--primary);
+  }

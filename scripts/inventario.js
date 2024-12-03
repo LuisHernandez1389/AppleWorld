@@ -1,120 +1,135 @@
-let products = new Map();
+// Configuración de Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyAE25LO6fKSQlEnnudNe-wMwg6HJOfgbR0",
+    authDomain: "apple-world-obregon.firebaseapp.com",
+    databaseURL: "https://apple-world-obregon-default-rtdb.firebaseio.com",
+    projectId: "apple-world-obregon",
+    storageBucket: "apple-world-obregon.firebasestorage.app",
+    messagingSenderId: "707131530457",
+    appId: "1:707131530457:web:fe2519039f8b22736e32c8"
+};
+
+// Inicializar Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+let productsRef = database.ref('products');
 let nextId = 1;
-let isEditing = false;
+let editingProductId = null; // Variable para almacenar el ID del producto que se está editando
 
+// Elementos del DOM
 const productForm = document.getElementById('productForm');
-const productId = document.getElementById('productId');
-const nameInput = document.getElementById('nameInput');
-const descriptionInput = document.getElementById('descriptionInput');
-const stockInput = document.getElementById('stockInput');
-const priceInput = document.getElementById('priceInput');
-const productAlert = document.getElementById('productAlert');
-const submitBtn = document.getElementById('submitBtn');
 const productsTableBody = document.getElementById('productsTableBody');
+const productAlert = document.getElementById('productAlert');
 
+// Evento para agregar o actualizar un producto
 productForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  
-  const product = {
-    id: isEditing ? parseInt(productId.value) : nextId++,
-    name: nameInput.value.trim(),
-    description: descriptionInput.value.trim(),
-    stock: parseInt(stockInput.value),
-    price: parseFloat(priceInput.value)
-  };
+    e.preventDefault();
+    const product = {
+        id: nextId++, // Coma faltante aquí
+        name: document.getElementById('nameInput').value.trim(),
+        description: document.getElementById('descriptionInput').value.trim(),
+        stock: parseInt(document.getElementById('stockInput').value),
+        price: parseFloat(document.getElementById('priceInput').value),
+        barcode: document.getElementById('barcodeInput').value.trim()  // Capturamos el código de barras
+    };
 
-  if (isEditing) {
-    updateProduct(product);
-  } else {
-    addProduct(product);
-  }
-  
-  resetForm();
+    if (editingProductId) {
+        // Si estamos editando un producto, actualizamos
+        updateProduct(editingProductId, product);
+    } else {
+        // Si no, agregamos un nuevo producto
+        addProduct(product);
+    }
 });
 
+// Función para mostrar alertas
 function showAlert(message, type) {
-  productAlert.textContent = message;
-  productAlert.className = `alert alert-${type}`;
-  productAlert.style.display = 'block';
-  
-  setTimeout(() => {
-    productAlert.style.display = 'none';
-  }, 3000);
+    productAlert.textContent = message;
+    productAlert.className = `alert alert-${type}`;
+    productAlert.style.display = 'block';
+
+    setTimeout(() => {
+        productAlert.style.display = 'none';
+    }, 3000);
 }
 
+// Función para agregar un producto a Firebase
 function addProduct(product) {
-  products.set(product.id, product);
-  updateProductsView();
-  showAlert('Producto agregado exitosamente', 'success');
+    productsRef.push(product)
+        .then(() => {
+            showAlert('Producto agregado exitosamente', 'success');
+            updateProductsView();
+        })
+        .catch((error) => {
+            showAlert('Error al agregar producto: ' + error.message, 'error');
+        });
 }
 
-function updateProduct(product) {
-  products.set(product.id, product);
-  updateProductsView();
-  showAlert('Producto actualizado exitosamente', 'success');
-}
-
-function deleteProduct(id) {
-  products.delete(id);
-  updateProductsView();
-  showAlert('Producto eliminado exitosamente', 'success');
-}
-
-function editProduct(id) {
-  const product = products.get(id);
-  if (!product) return;
-
-  productId.value = product.id;
-  nameInput.value = product.name;
-  descriptionInput.value = product.description;
-  stockInput.value = product.stock;
-  priceInput.value = product.price;
-
-  submitBtn.textContent = 'Actualizar Producto';
-  isEditing = true;
-}
-
-function resetForm() {
-  productForm.reset();
-  productId.value = '';
-  submitBtn.textContent = 'Agregar Producto';
-  isEditing = false;
-}
-
+// Función para actualizar la vista de productos
 function updateProductsView() {
-  productsTableBody.innerHTML = '';
+    productsTableBody.innerHTML = '';
 
-  if (products.size === 0) {
-    productsTableBody.innerHTML = `
-      <tr>
-        <td colspan="5">
-          <div class="empty-message">No hay productos registrados</div>
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  for (const [id, product] of products) {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${product.name}</td>
-      <td>${product.description}</td>
-      <td>${product.stock}</td>
-      <td>$${product.price.toFixed(2)}</td>
-      <td>
-        <div class="action-buttons">
-          <button class="btn btn-edit" onclick="editProduct(${id})">
-            Editar
-          </button>
-          <button class="btn btn-danger" onclick="deleteProduct(${id})">
-            Eliminar
-          </button>
-        </div>
-      </td>
-    `;
-    productsTableBody.appendChild(row);
-  }
+    productsRef.once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            const product = childSnapshot.val();
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${product.name}</td>
+                <td>${product.description}</td>
+                <td>${product.stock}</td>
+                <td>$${product.price.toFixed(2)}</td>
+                <td>${product.barcode}</td>  <!-- Mostrar el código de barras -->
+                <td>
+                    <button class="btn btn-edit" onclick="editProduct('${childSnapshot.key}')">Editar</button>
+                    <button class="btn btn-danger" onclick="deleteProduct('${childSnapshot.key}')">Eliminar</button>
+                </td>
+            `;
+            productsTableBody.appendChild(row);
+        });
+    });
 }
 
+// Función para editar un producto
+function editProduct(id) {
+    productsRef.child(id).once('value', (snapshot) => {
+        const product = snapshot.val();
+        document.getElementById('nameInput').value = product.name;
+        document.getElementById('descriptionInput').value = product.description;
+        document.getElementById('stockInput').value = product.stock;
+        document.getElementById('priceInput').value = product.price;
+        document.getElementById('barcodeInput').value = product.barcode; // Establecer el código de barras
+
+        // Establecer el ID del producto que se está editando
+        editingProductId = id;
+    });
+}
+
+// Función para actualizar un producto en Firebase
+function updateProduct(id, updatedProduct) {
+    productsRef.child(id).update(updatedProduct)
+        .then(() => {
+            showAlert('Producto actualizado exitosamente', 'success');
+            productForm.reset();
+            editingProductId = null; // Reiniciar la variable de edición
+            updateProductsView();
+        })
+        .catch((error) => {
+            showAlert('Error al actualizar producto: ' + error.message, 'error');
+        });
+}
+
+// Función para eliminar un producto de Firebase
+function deleteProduct(id) {
+    productsRef.child(id).remove()
+        .then(() => {
+            showAlert('Producto eliminado exitosamente', 'success');
+            updateProductsView();
+        })
+        .catch((error) => {
+            showAlert('Error al eliminar producto: ' + error.message, 'error');
+        });
+}
+
+// Cargar productos al iniciar
 updateProductsView();
