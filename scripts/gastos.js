@@ -55,7 +55,7 @@ const firebaseConfig = {
       name,
       description,
       amount,
-      date: new Date().toLocaleString()  // Guardar la fecha actual en formato de cadena
+      timestamp: new Date().toLocaleString()  // Guardar la fecha actual en formato de cadena
     };
   
     // Guardar el gasto localmente
@@ -107,7 +107,7 @@ const firebaseConfig = {
         <div>
           <strong>${expense.name}</strong><br>
           <small>${expense.description}</small><br>
-          <small>Fecha: ${expense.date}</small>  <!-- Mostrar la fecha -->
+          <small>Fecha: ${expense.timestamp}</small>  <!-- Mostrar la fecha -->
         </div>
         <div>$${expense.amount.toFixed(2)}</div>
       `;

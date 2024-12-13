@@ -1,116 +1,105 @@
-<html><head>
-    <meta charset="UTF-8">
-    <title>Sistema de Reportes</title>
-    <link rel="stylesheet" href="../estilos/reportes.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    </head>
-    <body>
-    <div id="navbar"></div> <!-- Contenedor para el navbar -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Ventas y Gastos Diarios</title>
+  <link rel="stylesheet" href="../estilos/reportes.css">
+</head>
+<body>
+  <div id="navbar"></div> <!-- Contenedor para el navbar -->
 
-    <div class="container">
-      <!-- Reporte de Gastos -->
-      <div class="report-card">
-        <div class="report-header">
-          <div class="report-icon expenses-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h2 class="report-title">Reporte de Gastos</h2>
+  <div class="container">
+    <div class="report-section sales-section">
+      <h2>
+        Ventas del Día
+        <input type="date" class="date-selector" id="salesDate">
+      </h2>
+      <div class="summary-card">
+        <div class="summary-item">
+          <h3>Total Ventas</h3>
+          <div class="amount" id="totalSales">$0.00</div>
         </div>
-        <div class="date-filter">
-          <select id="expensePeriod">
-            <option value="week">Esta Semana</option>
-            <option value="month">Este Mes</option>
-            <option value="year">Este Año</option>
-          </select>
+        <div class="summary-item">
+          <h3>Transacciones</h3>
+          <div class="amount" id="totalTransactions">0</div>
         </div>
-        <div class="metric">
-          <span class="metric-label">Total Gastos</span>
-          <span class="metric-value" id="expensesTotal">$15,420.50</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Promedio Diario</span>
-          <span class="metric-value" id="expensesAverage">$514.02</span>
-        </div>
-        <div class="chart-container">
-          <canvas id="expensesChart"></canvas>
+        <div class="summary-item">
+          <h3>Promedio</h3>
+          <div class="amount" id="averageSale">$0.00</div>
         </div>
       </div>
-    
-      <!-- Reporte de Ventas -->
-      <div class="report-card">
-        <div class="report-header">
-          <div class="report-icon sales-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-            </svg>
-          </div>
-          <h2 class="report-title">Reporte de Ventas</h2>
+      <div class="transaction-list" id="salesList">
+        <!-- Sales transactions will be populated here -->
+      </div>
+    </div>
+  
+    <div class="report-section expenses-section">
+      <h2>
+        Gastos del Día
+        <input type="date" class="date-selector" id="expensesDate">
+      </h2>
+      <div class="summary-card">
+        <div class="summary-item">
+          <h3>Total Gastos</h3>
+          <div class="amount" id="totalExpenses">$0.00</div>
         </div>
-        <div class="date-filter">
-          <select id="salesPeriod">
-            <option value="week">Esta Semana</option>
-            <option value="month">Este Mes</option>
-            <option value="year">Este Año</option>
-          </select>
+        <div class="summary-item">
+          <h3>Transacciones</h3>
+          <div class="amount" id="totalExpenseTransactions">0</div>
         </div>
-        <div class="metric">
-          <span class="metric-label">Total Ventas</span>
-          <span class="metric-value trend-up" id="salesTotal">$25,840.75</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Promedio Diario</span>
-          <span class="metric-value" id="salesAverage">$861.36</span>
-        </div>
-        <div class="chart-container">
-          <canvas id="salesChart"></canvas>
+        <div class="summary-item">
+          <h3>Promedio</h3>
+          <div class="amount" id="averageExpense">$0.00</div>
         </div>
       </div>
-    
-      <!-- Reporte de Inventario -->
-      <div class="report-card">
-        <div class="report-header">
-          <div class="report-icon inventory-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
-            </svg>
-          </div>
-          <h2 class="report-title">Reporte de Inventario</h2>
+      <div class="transaction-list" id="expensesList">
+        <!-- Expenses transactions will be populated here -->
+      </div>
+    </div>
+  </div>
+  
+  <div class="balance-container">
+    <div class="report-section balance-section">
+      <h2>Balance del Día</h2>
+      <div class="balance-grid">
+        <div class="summary-item">
+          <h3>Total Ventas</h3>
+          <div class="amount" id="balanceSales">$0.00</div>
         </div>
-        <div class="date-filter">
-          <select id="inventoryPeriod">
-            <option value="week">Esta Semana</option>
-            <option value="month">Este Mes</option>
-            <option value="year">Este Año</option>
-          </select>
+        <div class="summary-item">
+          <h3>Total Gastos</h3>
+          <div class="amount" id="balanceExpenses">$0.00</div>
         </div>
-        <div class="metric">
-          <span class="metric-label">Total Productos</span>
-          <span class="metric-value" id="inventoryTotal">324</span>
+        <div class="summary-item">
+          <h3>Balance Neto</h3>
+          <div class="amount" id="netBalance">$0.00</div>
         </div>
-        <div class="metric">
-          <span class="metric-label">Valor del Inventario</span>
-          <span class="metric-value" id="inventoryValue">$45,750.00</span>
-        </div>
-        <div class="chart-container">
-          <canvas id="inventoryChart"></canvas>
+        <div class="summary-item">
+          <h3>Margen</h3>
+          <div class="amount" id="margin">0%</div>
         </div>
       </div>
     </div>
-    <script src="../scripts/reportes.js" ></script>
-    <script >
-        // Función para cargar el navbar
-        function loadNavbar() {
-            fetch('navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar').innerHTML = data;
-                })
-                .catch(error => console.error('Error al cargar el navbar:', error));
-        }
-    
-        // Llamar a la función para cargar el navbar
-        loadNavbar();
-    </script>
-    </body></html>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <script type="module" src="../scripts/reportes.js"></script>
+  <script>
+    // Función para cargar el navbar
+    function loadNavbar() {
+      fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navbar').innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar el navbar:', error));
+    }
+
+    // Llamar a la función para cargar el navbar
+    loadNavbar();
+  </script>
+</body>
+</html>
